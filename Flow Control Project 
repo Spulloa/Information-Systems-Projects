@@ -1,0 +1,189 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Spulloa/Information-Systems-Projects/blob/main/Flow%20Control%20Project%20\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "ut4G8BrFGzsM"
+      },
+      "source": [
+        "**READ ME FIRST:**\n",
+        "\n",
+        "Use the code blocks below to answer each quiz question. Use the code blocks below to answer each quiz question. IMPORTANT: Be sure that the text \"# Question 1:\", \"# Question 2:\", and so forth remains in each of your code cells. That is how the auto-grader searches for your responses\n",
+        "\n",
+        "Only print the output required for each question. Otherwise, the auto-grader may misinterpret your results. See the next code cell below as an an example (leave that code cell in this file):"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 1,
+      "metadata": {
+        "id": "tFo62wKAGzsO",
+        "outputId": "4ef8de90-70c3-4218-bd42-c706062ddc00",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "16\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Question 0: (example)\n",
+        "\n",
+        "# Create two variables to store the numbers 7 and 9\n",
+        "# Add those two variables together and print them\n",
+        "\n",
+        "x = 7\n",
+        "y = 9\n",
+        "print(x + y)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "JlIUmkvjztB6"
+      },
+      "source": [
+        "**Objectives**\n",
+        "\n",
+        "The purpose of this checkpoint is to give you practice with using flow control. However, it will implement lessons learned in prior chapters as well.\n",
+        "\n",
+        "**Background**\n",
+        "\n",
+        "You are a medical researcher running a study on a new drug. You are screening potential participants and you need to make sure you identify any outliers. In particular, you want to flag anyone who is outside the typical ranges of tall/short or light/heavy. Therefore, write a simple routine to determine if a potential participant is eligible based on.\n",
+        "\n",
+        "Weight\n",
+        "Height\n",
+        "Sex\n",
+        "\n",
+        "**Requirements**\n",
+        "\n",
+        "Collect these three data points through user input() boxes. Men within 62 inches and 80 inches tall and between 150 and 280 lbs are needed for this study. Women between 59 and 71 inches and 100 and 180 lbs are needed for this study. Create flow logic to determine whether an inputted patient is within the thresholds. If they are an outlier, print a message indicating they are not eligible and tell them which thresholds they did not meet. Create as many if/elif/else statements as you need to accomplish this task. For example, the table below indicates potential inputs and outputs:\n",
+        "\n",
+        "Entered inputs:&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Output:\n",
+        "\n",
+        "Sex&nbsp;&nbsp;&nbsp;Weight&nbsp;&nbsp;&nbsp;Height\n",
+        "\n",
+        "Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;280&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;80&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Participant is too tall\n",
+        "\n",
+        "Male&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;150&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;62&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Participant is too light\n",
+        "\n",
+        "Female&nbsp;180&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;59&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Participant is too short\n",
+        "\n",
+        "Female&nbsp;100&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;71&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Participant qualifies for the study\n",
+        "\n",
+        "In order to analyze data, we need to handle the many possible ways that these data could be entered. For example, sex could be entered into a textbox as \"female\", \"f\", \"Female\", 0, 1, \"Male\", \"Man\", \"woman\", or it could be mispelled. Use some combination of if/elif/else statements (including \"or\" and/or \"and\" criteria) and/or string formatting (e.g. converting case or examining only the first letter) to handle as many possibilities as you can think of to handle every type of input.\n",
+        "\n",
+        "To keep this simple, you do not need to validate that the user enters numeric inputs for weight and height. You can assume they will enter acceptable values.\n",
+        "\n",
+        "There are many different ways to complete these requirements. You are not being tested to see if you use a particular method. Your code simply needs to meet the requirements above with only one exception. You must find a way to use each of the following commands in your solution: if, else, and elif"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 13,
+      "metadata": {
+        "id": "lWrtGsUgzpJu",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        },
+        "outputId": "a2513062-3102-48f3-caa7-0263d8c48f2a"
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Sex:f\n",
+            "Weight:100\n",
+            "Height:65\n",
+            "Subject is ineligible for study\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Question 1: Write all code needed in this cell\n",
+        "\n",
+        "sex = input(\"Sex:\")\n",
+        "weight = int(input(\"Weight:\"))\n",
+        "height = int(input(\"Height:\"))\n",
+        "\n",
+        "i = True\n",
+        "outlier = False\n",
+        "\n",
+        "sex = sex[0:1]\n",
+        "\n",
+        "if(sex == 'm' or sex == 'M' or sex == '1'):\n",
+        "    if(height <= 62 or height >= 80):\n",
+        "        outlier = True\n",
+        "        print(\"Subject is ineligible for study\")\n",
+        "    if(weight < 150 or weight > 280):\n",
+        "        outlier = True\n",
+        "        print(\"Subject is ineligible for study\")\n",
+        "elif(sex == 'f' or sex =='F' or sex =='w' or sex =='W' or sex == 0):\n",
+        "    if(height <= 59 or height >= 71):\n",
+        "        outlier = True\n",
+        "        print(\"Subject is ineligible for study\")\n",
+        "    if(weight <= 100 or weight >= 180):\n",
+        "        outlier = True\n",
+        "        print(\"Subject is ineligible for study\")\n",
+        "else:\n",
+        "    print(\"Please start over\")\n",
+        "\n",
+        "if(outlier == False):\n",
+        "    print(\"Subject eligible for study\")\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n",
+        "\n"
+      ]
+    }
+  ],
+  "metadata": {
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3.9.1 64-bit",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.9.1"
+    },
+    "vscode": {
+      "interpreter": {
+        "hash": "11938c6bc6919ae2720b4d5011047913343b08a43b18698fd82dedb0d4417594"
+      }
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
