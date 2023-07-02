@@ -1,0 +1,185 @@
+{
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/Spulloa/Information-Systems-Projects/blob/main/IPO%20with%20flow\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "xMtNy2D4cDme"
+      },
+      "source": [
+        "**READ ME FIRST:**\n",
+        "\n",
+        "Use the code blocks below to answer each quiz question. Use the code blocks below to answer each quiz question. IMPORTANT: Be sure that the text \"# Question 1:\", \"# Question 2:\", and so forth remains in each of your code cells. That is how the auto-grader searches for your responses\n",
+        "\n",
+        "Only print the output required for each question. Otherwise, the auto-grader may misinterpret your results. See the next code cell below as an an example (leave that code cell in this file):"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "LGEU9wAZcDmg",
+        "outputId": "b39abd98-506a-4425-a532-6bbe4e6824a5"
+      },
+      "outputs": [
+        {
+          "name": "stdout",
+          "output_type": "stream",
+          "text": [
+            "16\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Question 0: (example)\n",
+        "\n",
+        "# Create two variables to store the numbers 7 and 9\n",
+        "# Add those two variables together and print them\n",
+        "\n",
+        "x = 7\n",
+        "y = 9\n",
+        "print(x + y)"
+      ]
+    },
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "55EjItV4cDmh"
+      },
+      "source": [
+        "**Background**\n",
+        "\n",
+        "You are a Human Resources manager in charge of calculating employee pay.\n",
+        "\n",
+        "**Tasks**\n",
+        "\n",
+        "Create a basic application that calculates the the gross and net pay for three employees working at your company. You can count on there only being three and always three employees. You should collect (as inputs) each employee's name, hours worked, and hourly rate (3 variables x 3 employees = 9 variables). Also collect the tax rate which will be the same for all employees. Finally, print out a nicely formatted table that looks something like the one provided in the MyEducator assessment description.\n",
+        "\n",
+        "If the number of hours worked is more than 40, then the pay rate should be 1.5 times the amount entered. If the number of hours is more than 60, then the pay rate should be 1.6 times the amount entered. Find a way to use both an elif and nested if statement as you meet this criterion.\n",
+        "\n",
+        "**Requirements**\n",
+        "\n",
+        "* Use bold (\\033[1m), underline (\\033[4m), and the color red (\\033[91m) somewhere in the code\n",
+        "* You do not need to write code that adds these values into a table data structure. Simply print out the headers and then print out the values one line at a time as they are added. Automatically print out the totals line once three rows of data have been entered."
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": 16,
+      "metadata": {
+        "id": "2jl6Wx2k-ILt",
+        "outputId": "b8eda13e-5a2b-4674-eca4-6481e95bd2a3",
+        "colab": {
+          "base_uri": "https://localhost:8080/"
+        }
+      },
+      "outputs": [
+        {
+          "output_type": "stream",
+          "name": "stdout",
+          "text": [
+            "Name:1\n",
+            "Hours worked:45\n",
+            "Hourly rate:15\n",
+            "Name:2\n",
+            "Hours worked:45\n",
+            "Hourly rate:15\n",
+            "Name:3\n",
+            "Hours worked:15\n",
+            "Hourly rate:14\n",
+            "Tax rate:5\n",
+            "\u001b[1mEmployee Name       Gross Pay      Net Pay        \u001b[0m\n",
+            "1                   $        712.50$      -2850.00\n",
+            "2                   $        712.50$      -2850.00\n",
+            "3                   $        210.00$       -840.00\n",
+            "\u001b[91m..................................................\u001b[0m\n",
+            "Total               $        630.00$      -2520.00\n"
+          ]
+        }
+      ],
+      "source": [
+        "# Question #1: Write all code needed in this cell\n",
+        "\n",
+        "employees = []\n",
+        "for i in range(3):\n",
+        "    name = input('Name:')\n",
+        "    hours = float(input(\"Hours worked:\"))\n",
+        "    hour_rate = float(input(\"Hourly rate:\"))\n",
+        "    employees.append((name, hours, hour_rate))\n",
+        "\n",
+        "tax_rate = float(input(\"Tax rate:\"))\n",
+        "\n",
+        "print(f\"\\033[1m{'Employee Name':20}{'Gross Pay':15}{'Net Pay':15}\\033[0m\")\n",
+        "\n",
+        "for name, hours, hour_rate in employees:\n",
+        "    if hours <= 40:\n",
+        "        gross_pay = hours * hour_rate\n",
+        "    elif hours <= 60:\n",
+        "        gross_pay = 40 * hour_rate + (hours - 40) * hour_rate * 1.5\n",
+        "    else:\n",
+        "        gross_pay = 40 * hour_rate + 20 * hour_rate * 1.5 + (hours - 60) * hour_rate * 1.6\n",
+        "\n",
+        "    tax_amount = gross_pay * tax_rate\n",
+        "    net_pay = gross_pay - tax_amount\n",
+        "\n",
+        "    print(f\"{name:20}${gross_pay:>14.2f}${net_pay:>14.2f}\")\n",
+        "\n",
+        "print(\"\\033[91m\" + \".\" * 50 + \"\\033[0m\")\n",
+        "total_gross_pay = sum(gross_pay for name, hours, hour_rate in employees)\n",
+        "total_tax_amount = sum(gross_pay * tax_rate for name, hours, hour_rate in employees)\n",
+        "total_net_pay = total_gross_pay - total_tax_amount\n",
+        "print(f\"{'Total':20}${total_gross_pay:>14.2f}${total_net_pay:>14.2f}\")\n",
+        "\n"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "execution_count": null,
+      "metadata": {
+        "id": "U9AtBYU4cDmi"
+      },
+      "outputs": [],
+      "source": []
+    }
+  ],
+  "metadata": {
+    "celltoolbar": "Raw Cell Format",
+    "colab": {
+      "provenance": [],
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "display_name": "Python 3.9.1 64-bit",
+      "language": "python",
+      "name": "python3"
+    },
+    "language_info": {
+      "codemirror_mode": {
+        "name": "ipython",
+        "version": 3
+      },
+      "file_extension": ".py",
+      "mimetype": "text/x-python",
+      "name": "python",
+      "nbconvert_exporter": "python",
+      "pygments_lexer": "ipython3",
+      "version": "3.9.1"
+    },
+    "vscode": {
+      "interpreter": {
+        "hash": "11938c6bc6919ae2720b4d5011047913343b08a43b18698fd82dedb0d4417594"
+      }
+    }
+  },
+  "nbformat": 4,
+  "nbformat_minor": 0
+}
